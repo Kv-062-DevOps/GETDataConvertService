@@ -5,6 +5,8 @@ Simple Go Service which can read data in YAML, perform some calculations and tra
 Hello everyone! This is the latest version of my Go service. I strongly advice you to run this in container,
 which is pushed to DockerHub. All you need to do is to run the following command:
 ```
-docker run --network="host" -e ENDPOINT="your DB service name, which is basically server which will send you YAML"
-nikitasadok/go-get-service
+docker run --network="host" -e ENDPOINT="your DB service name" -e HOST_PORT="port which you'll run server on" nikitasadok/go-get-service
+
 ```
+ENDPOINT format: "http(s)://yourdns/ip:port"
+HOST_PORT format: ":portnumber"
