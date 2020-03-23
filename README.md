@@ -8,5 +8,5 @@ which is pushed to DockerHub. All you need to do is to run the following command
 docker run --network="host" -e ENDPOINT="your DB service name" -e HOST_PORT="port which you'll run server on" nikitasadok/go-get-service
 
 ```
-ENDPOINT format: "http(s)://yourdns/ip:port"
+ENDPOINT format: "http(s)://yourdns/ip:port/list"
 HOST_PORT format: ":portnumber"
