@@ -6,8 +6,8 @@ import (
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strconv"
+	"os"
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
@@ -32,6 +32,7 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 	data, _ := ioutil.ReadAll(resp.Body)
 
 	e := yaml.Unmarshal(data, &response)
+	print(len(response))
 	if e != nil {
 		var emp Employee
 		err := yaml.Unmarshal(data, &emp)
