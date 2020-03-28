@@ -9,6 +9,6 @@ import (
 
 func main() {
 	router := routes.NewRouter()
-	log.Fatal(http.ListenAndServe(os.Getenv("HOST_PORT"), router))
+	log.Fatal(http.ListenAndServe(":" + os.Getenv("HOST_PORT"), router))
 
 }
