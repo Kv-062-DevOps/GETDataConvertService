@@ -7,12 +7,10 @@ import (
         "io/ioutil"
         "net/http"
         "os"
-        "fmt"
         "strconv"
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
-        fmt.Println(os.Getenv("ENDPOINT"))
         req, err := http.NewRequest("GET", "http://" + os.Getenv("ENDPOINT") + "/list",r.Body)
         if err != nil {
                 http.Error(w, "Troubles with forming request to DB service", 500)
