@@ -13,5 +13,5 @@ RUN go build
 
 FROM ubuntu
 WORKDIR /app
-COPY --from=builder /app/main .
-CMD ["./main"]
+COPY --from=builder /app/GETDataConvertService .
+CMD ["./GETDataConvertService"]
