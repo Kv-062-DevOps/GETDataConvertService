@@ -11,11 +11,11 @@ import (
 
 //testing GitHub Action again
 func main() {
-	metrics.Count()
-	metrics.Hist()
-	//metrics.Collect()
+
+	// call RegMetric() func from metrics module
+	metrics.RegMetrics()
+
 	router := routes.NewRouter()
-	//metrics.Output()
 	log.Fatal(http.ListenAndServe(":"+os.Getenv("HOST_PORT"), router))
 
 }
