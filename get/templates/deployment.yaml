@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "get.fullname" . }}
+  labels: {{- include "get.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "get.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "get.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.image.HOST_PORT }}
+              protocol: TCP
+              name: http
+          env:
+            - name: "HOST_PORT"
+              value: "{{ .Values.image.HOST_PORT }}"
+            - name: "ENDPOINT"
+              value: "{{ .Release.Name }}-{{ .Values.image.ENDPOINT }}"
+      imagePullSecrets:
+      - name: {{ .Values.image.imagePullSecrets }}

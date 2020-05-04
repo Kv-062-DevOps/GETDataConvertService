@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: 074368059797.dkr.ecr.eu-central-1.amazonaws.com/get
+  tag: latest
+  imagePullSecrets: awsecr-cred
+  HOST_PORT: "8081"
+  ENDPOINT: "back-srv:8083"
+
+service:
+  type: ClusterIP
+  port: "8081"
+  targetPort: 8081
