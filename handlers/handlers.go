@@ -25,6 +25,7 @@ func RootHandler(w http.ResponseWriter, r *http.Request) {
 
 	var err error
 
+
 	// defer function which collects required metrics
 	defer func() {
 		metrics.CounterVec.WithLabelValues(serName, method, endpoint, status).Inc()
