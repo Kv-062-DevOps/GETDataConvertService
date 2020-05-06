@@ -15,17 +15,21 @@ import (
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
+
+	// gather method, time, endpoint for Prometheus
 	start := time.Now()
-	status := ""
-	endpoint := r.URL.Path
 	serName := "get-srv"
 	method := r.Method
+	endpoint := r.URL.Path
+	status := ""
 
 	var err error
 
+
+	// defer function which collects required metrics
 	defer func() {
-		metrics.HistogramVec.WithLabelValues(serName, method, endpoint, status).
-			Observe(time.Since(start).Seconds())
+		metrics.CounterVec.WithLabelValues(serName, method, endpoint, status).Inc()
+		metrics.HistogramVec.WithLabelValues(serName, endpoint).Observe(time.Since(start).Seconds())
 	}()
 
 	req, err := http.NewRequest("GET", "http://"+os.Getenv("ENDPOINT")+"/list",

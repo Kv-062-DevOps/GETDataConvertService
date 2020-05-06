@@ -22,11 +22,16 @@ func NewRouter() *mux.Router {
 	route.Pattern = "/"
 	route.HandlerFunc = handlers.RootHandler
 	router := mux.NewRouter().StrictSlash(true)
-	var route1 Route
-	route1.Name = "metrics"
-	route1.Method = "GET"
-	route1.Pattern = "/metrics"
+
+	// setting route for metrics output
+	var metricsRoute Route
+	metricsRoute.Name = "metrics"
+	metricsRoute.Method = "GET"
+	metricsRoute.Pattern = "/metrics"
+
 	router.Methods(route.Method).Path(route.Pattern).Name(route.Name).Handler(route.HandlerFunc)
-	router.Methods(route1.Method).Path(route1.Pattern).Name(route1.Name).Handler(promhttp.Handler())
+
+	// handler for metrics
+	router.Methods(metricsRoute.Method).Path(metricsRoute.Pattern).Name(metricsRoute.Name).Handler(promhttp.Handler())
 	return router
 }
