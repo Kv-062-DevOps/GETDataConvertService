@@ -25,6 +25,6 @@ spec:
             - name: "HOST_PORT"
               value: "{{ .Values.image.HOST_PORT }}"
             - name: "ENDPOINT"
-              value: "{{ .Release.Name }}-{{ .Values.image.ENDPOINT }}"
+              value: "{{ .Values.image.ENDPOINT }}"
       imagePullSecrets:
       - name: {{ .Values.image.imagePullSecrets }}
